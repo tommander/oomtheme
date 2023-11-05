@@ -118,6 +118,9 @@ main abbr {
 
 /* MAIN (MASS, ROSARY) */
 
+main > article > div.entry-content > span {
+	display: block;
+}
 main > article > div.entry-content > * {
 	padding: 1rem;
 }
