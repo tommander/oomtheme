@@ -8,6 +8,8 @@
 
 namespace TMD\OrderOfMass\Theme;
 
+use TMD\OrderOfMass\Plugin\Parameters;
+
 /**
  * Undocumented psalm suppress.
  *
@@ -17,12 +19,14 @@ global
 	$oomtheme_l,
 	$oomtheme_labels,
 	$oomtheme_virtual_page,
-	$oomtheme_param_type,
-	$oomtheme_param_texts,
-	$oomtheme_param_date,
 	$oomtheme_bible,
 	$oomtheme_calendar,
+	$oomtheme_parameters,
 	$oomtheme_mysteries;
+
+$oomtheme_param_type = $oomtheme_parameters->get_parameter( Parameters::PARAMETER_TYPE );
+$oomtheme_param_texts = $oomtheme_parameters->get_parameter( Parameters::PARAMETER_TEXTS );
+$oomtheme_param_date = $oomtheme_parameters->get_parameter( Parameters::PARAMETER_DATE );
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>

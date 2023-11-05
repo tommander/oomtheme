@@ -41,17 +41,11 @@
       <globals>
         <var name="oomtheme_main" type="TMD\OrderOfMass\Plugin\Main" />
         <var name="oomtheme_calendar" type="TMD\OrderOfMass\Plugin\Calendar" />
-        <!-- <var name="oomtheme_parameters" type="TMD\OrderOfMass\Plugin\Parameters" /> -->
         <var name="oomtheme_virtual_page" type="TMD\OrderOfMass\Plugin\VirtualPage" />
         <var name="oomtheme_labels" type="TMD\OrderOfMass\Plugin\Labels" />
-        <!-- <var name="oomtheme_lectionary" type="TMD\OrderOfMass\Plugin\Lectionary" /> -->
         <var name="oomtheme_bible" type="TMD\OrderOfMass\Plugin\Bible" />
         <var name="oomtheme_mysteries" type="TMD\OrderOfMass\Plugin\Mysteries" />
-        <var name="oomtheme_param_type" type="string" />
-        <var name="oomtheme_param_texts" type="string" />
-        <!-- <var name="oomtheme_param_labels" type="string" /> -->
-        <var name="oomtheme_param_date" type="string" />
-        <!-- <var name="oomtheme_param_bible" type="string" /> -->
+        <var name="oomtheme_parameters" type="TMD\OrderOfMass\Plugin\Parameters" />
         <var name="oomtheme_l" type="callable" />
       </globals>
     

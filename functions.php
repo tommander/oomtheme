@@ -92,9 +92,6 @@ $oomtheme_bible = $oomtheme_ctnr->get( Bible::class );
  * @var Mysteries
  */
 $oomtheme_mysteries = $oomtheme_ctnr->get( Mysteries::class );
-$oomtheme_param_type = $oomtheme_parameters->get_parameter( Parameters::PARAMETER_TYPE );
-$oomtheme_param_texts = $oomtheme_parameters->get_parameter( Parameters::PARAMETER_TEXTS );
-$oomtheme_param_date = $oomtheme_parameters->get_parameter( Parameters::PARAMETER_DATE );
 /**
  * Undocumented function
  *
