@@ -1,4 +1,22 @@
 {
+    "name": "tmd/oomtheme",
+    "description": "Order of Mass Theme",
+    "version": "0.1.0",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tomáš Rajnoha",
+            "email": "tomas.rajnoha@tommander.cz",
+            "homepage": "https://tommander.cz",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "oomtheme@tommander.cz",
+        "issues": "https://github.com/tommander/oomtheme/issues",
+        "source": "https://github.com/tommander/oomtheme"
+    },
     "scripts": {
         "phpcs": "phpcs",
         "psalm": "psalm --show-info=true --no-file-cache --no-reflection-cache --no-cache",
