@@ -20,7 +20,7 @@ if ( have_posts() === true ) {
 	// Load posts loop.
 	while ( have_posts() === true ) {
 		the_post();
-		get_template_part( 'content', get_theme_mod( 'display_excerpt_or_full_post', 'excerpt' ) );
+		get_template_part( 'content', 'excerpt' );
 	}
 } else {
 	// If no content, include the "No posts found" template.

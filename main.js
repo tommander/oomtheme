@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', (evt) => {
           return;
         }
 
-        elemForm.action = `http://localhost/mass/${elemType.value}/${elemTexts.value}`;
+        elemForm.action = `${window.oom.siteurl}${elemType.value}/${elemTexts.value}`;
         elemForm.submit();
     }
     

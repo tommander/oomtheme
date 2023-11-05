@@ -1,0 +1,994 @@
+<?php
+namespace Invoker {
+    interface InvokerInterface
+    {
+        /**
+         * @param array|callable|string $callable
+         * @param array $parameters
+         *
+         * @return mixed
+         *
+         * @throws Exception\InvocationException
+         * @throws Exception\NotCallableException
+         * @throws Exception\NotEnoughParametersException
+         */
+        public function call($callable, array $parameters = array());
+    }
+}
+namespace Invoker\Exception {
+    class InvocationException extends \Exception
+    {
+    }
+    class NotCallableException extends \Invoker\Exception\InvocationException
+    {
+        /**
+         * @param mixed $value
+         */
+        public static function fromInvalidCallable($value, bool $containerEntry = false) : \Invoker\Exception\NotCallableException
+        {
+        }
+    }
+    class NotEnoughParametersException extends \Invoker\Exception\InvocationException
+    {
+    }
+}
+namespace DI {
+    class CompiledContainer extends \DI\Container
+    {
+        protected const METHOD_MAPPING = array();
+        private ?\Invoker\InvokerInterface $factoryInvoker;
+        /**
+         * @throws \Psr\Container\NotFoundExceptionInterface
+         * @throws \Psr\Container\ContainerExceptionInterface
+         */
+        public function get(string $id)
+        {
+        }
+        public function has(string $id) : bool
+        {
+        }
+        protected function setDefinition(string $name, \DI\Definition\Definition $definition)
+        {
+        }
+        protected function resolveFactory($callable, $entryName, array $extraParameters = array())
+        {
+        }
+    }
+    class Container implements \Psr\Container\ContainerInterface, \DI\FactoryInterface, \Invoker\InvokerInterface
+    {
+        protected array $resolvedEntries;
+        private \DI\Definition\Source\MutableDefinitionSource $definitionSource;
+        private \DI\Definition\Resolver\DefinitionResolver $definitionResolver;
+        /**
+         * @var array<Definition\Definition|null>
+         */
+        private array $fetchedDefinitions;
+        protected array $entriesBeingResolved;
+        private ?\Invoker\InvokerInterface $invoker;
+        protected \Psr\Container\ContainerInterface $delegateContainer;
+        protected \DI\Proxy\ProxyFactory $proxyFactory;
+        public static function create(array $definitions) : \DI\Container
+        {
+        }
+        /**
+         * @param \Psr\Container\ContainerInterface|null $wrapperContainer
+         */
+        public function __construct(array $definitions = array(), ?\DI\Proxy\ProxyFactory $proxyFactory = null, ?\Psr\Container\ContainerInterface $wrapperContainer = null)
+        {
+        }
+        /**
+         * @template T as mixed
+         *
+         * @param T::class|string $id
+         *
+         * @return T|mixed
+         *
+         * @throws DependencyException
+         * @throws NotFoundException
+         */
+        public function get(string $id)
+        {
+        }
+        public function getDefinition(string $name) : ?\DI\Definition\Definition
+        {
+        }
+        /**
+         * @template T as mixed
+         *
+         * @param T::class|string $name
+         * @param array $parameters
+         *
+         * @return T|mixed
+         *
+         * @throws \InvalidArgumentException
+         * @throws DependencyException
+         * @throws NotFoundException
+         */
+        public function make(string $name, array $parameters = array())
+        {
+        }
+        public function has(string $id) : bool
+        {
+        }
+        /**
+         * @template T as mixed
+         *
+         * @param T|object $instance
+         *
+         * @return T|object
+         *
+         * @throws \InvalidArgumentException
+         * @throws DependencyException
+         */
+        public function injectOn(object $instance) : object
+        {
+        }
+        /**
+         * @param array|callable|string $callable
+         * @param array $parameters
+         *
+         * @return mixed
+         *
+         * @throws \Invoker\Exception\InvocationException
+         * @throws \Invoker\Exception\NotCallableException
+         * @throws \Invoker\Exception\NotEnoughParametersException
+         */
+        public function call($callable, array $parameters = array())
+        {
+        }
+        /**
+         * @param string $name
+         * @param Definition\Helper\DefinitionHelper|mixed $value
+         */
+        public function set(string $name, $value)
+        {
+        }
+        /**
+         * @return array<string>
+         */
+        public function getKnownEntryNames() : array
+        {
+        }
+        /**
+         * @param string $name
+         *
+         * @throws Definition\Exception\InvalidDefinition
+         * @throws NotFoundException
+         */
+        public function debugEntry(string $name) : string
+        {
+        }
+        public function getEntryType($entry) : string
+        {
+        }
+        /**
+         * @throws DependencyException
+         */
+        public function resolveDefinition(\DI\Definition\Definition $definition, array $parameters = array())
+        {
+        }
+        protected function setDefinition(string $name, \DI\Definition\Definition $definition)
+        {
+        }
+        public function getInvoker() : \Invoker\InvokerInterface
+        {
+        }
+        public function createDefaultDefinitionSource(array $definitions) : \DI\Definition\Source\SourceChain
+        {
+        }
+    }
+    /**
+     * @template-covariant ContainerClass as \DI\Container
+     */
+    class ContainerBuilder
+    {
+        /**
+         * @var ContainerClass::class
+         */
+        private string $containerClass;
+        /**
+         * @var ContainerClass::class
+         */
+        private string $containerParentClass;
+        private bool $useAutowiring;
+        private bool $useAttributes;
+        private ?string $proxyDirectory;
+        private ?\Psr\Container\ContainerInterface $wrapperContainer;
+        /**
+         * @var array<Definition\Source\DefinitionSource|array|string>
+         */
+        private array $definitionSources;
+        private bool $locked;
+        private ?string $compileToDirectory;
+        private bool $sourceCache;
+        protected string $sourceCacheNamespace;
+        /**
+         * @param ContainerClass::class $containerClass
+         */
+        public function __construct(string $containerClass = \DI\Container::class)
+        {
+        }
+        /**
+         * @return ContainerClass
+         */
+        public function build()
+        {
+        }
+        /**
+         * @template T as CompiledContainer
+         *
+         * @param string $directory
+         * @param string $containerClass
+         * @param T::class $containerParentClass
+         *
+         * @return ContainerBuilder<T>
+         */
+        public function enableCompilation(string $directory, string $containerClass = 'CompiledContainer', string $containerParentClass = \DI\CompiledContainer::class) : \DI\ContainerBuilder
+        {
+        }
+        /**
+         * @return static
+         */
+        public function useAutowiring(bool $bool) : \DI\ContainerBuilder
+        {
+        }
+        /**
+         * @return static
+         */
+        public function useAttributes(bool $bool) : \DI\ContainerBuilder
+        {
+        }
+        /**
+         * @param bool $writeToFile
+         * @param null|string $proxyDirectory
+         *
+         * @return static
+         *
+         * @throws \InvalidArgumentException
+         */
+        public function writeProxiesToFile(bool $writeToFile, ?string $proxyDirectory = null) : \DI\ContainerBuilder
+        {
+        }
+        /**
+         * @return static
+         */
+        public function wrapContainer(\Psr\Container\ContainerInterface $otherContainer) : \DI\ContainerBuilder
+        {
+        }
+        /**
+         * @param Definition\Source\DefinitionSource|array|string $definitions
+         *
+         * @return static
+         */
+        public function addDefinitions(array ...$definitions) : \DI\ContainerBuilder
+        {
+        }
+        /**
+         * @param string $cacheNamespace
+         *
+         * @return static
+         */
+        public function enableDefinitionCache(string $cacheNamespace = '') : \DI\ContainerBuilder
+        {
+        }
+        public function isCompilationEnabled() : bool
+        {
+        }
+        public function ensureNotLocked()
+        {
+        }
+    }
+    /**
+     * @param array|mixed $values
+     */
+    function add($values) : \DI\Definition\ArrayDefinitionExtension
+    {
+    }
+    /**
+     * @param null|string $className
+     */
+    function autowire(?string $className = null) : \DI\Definition\Helper\AutowireDefinitionHelper
+    {
+    }
+    /**
+     * @param null|string $className
+     */
+    function create(?string $className = null) : \DI\Definition\Helper\CreateDefinitionHelper
+    {
+    }
+    /**
+     * @param callable $callable
+     */
+    function decorate(array $callable) : \DI\Definition\Helper\FactoryDefinitionHelper
+    {
+    }
+    /**
+     * @param string $variableName
+     * @param mixed|null $defaultValue
+     */
+    function env(string $variableName, $defaultValue = null) : \DI\Definition\EnvironmentVariableDefinition
+    {
+    }
+    /**
+     * @param array|callable|string $factory
+     */
+    function factory(array $factory) : \DI\Definition\Helper\FactoryDefinitionHelper
+    {
+    }
+    function get(string $entryName) : \DI\Definition\Reference
+    {
+    }
+    /**
+     * @param string $expression
+     */
+    function string(string $expression) : \DI\Definition\StringDefinition
+    {
+    }
+    function value($value) : \DI\Definition\ValueDefinition
+    {
+    }
+    class DependencyException extends \Exception
+    {
+    }
+    interface FactoryInterface
+    {
+        /**
+         * @param string $name
+         * @param array $parameters
+         *
+         * @throws \InvalidArgumentException
+         * @throws DependencyException
+         * @throws NotFoundException
+         */
+        public function make(string $name, array $parameters = array());
+    }
+    class NotFoundException extends \Exception
+    {
+    }
+}
+namespace DI\Definition {
+    class ArrayDefinition implements \DI\Definition\Definition
+    {
+        private string $name;
+        private array $values;
+        public function __construct(array $values)
+        {
+        }
+        public function getName() : string
+        {
+        }
+        public function setName(string $name)
+        {
+        }
+        public function getValues() : array
+        {
+        }
+        public function replaceNestedDefinitions($replacer)
+        {
+        }
+        public function __toString() : string
+        {
+        }
+    }
+    class ArrayDefinitionExtension extends \DI\Definition\ArrayDefinition
+    {
+        private ?\DI\Definition\ArrayDefinition $subDefinition;
+        public function getValues() : array
+        {
+        }
+        public function setExtendedDefinition(\DI\Definition\Definition $definition)
+        {
+        }
+    }
+    class AutowireDefinition extends \DI\Definition\ObjectDefinition
+    {
+    }
+    interface Definition extends \DI\Factory\RequestedEntry, \Stringable
+    {
+        public function getName() : string;
+        public function setName(string $name);
+        public function replaceNestedDefinitions($replacer);
+        public function __toString() : string;
+    }
+    class EnvironmentVariableDefinition implements \DI\Definition\Definition
+    {
+        private string $name;
+        /**
+         * @var string
+         */
+        private string $variableName;
+        /**
+         * @var bool
+         */
+        private bool $isOptional;
+        /**
+         * @var mixed|null
+         */
+        private $defaultValue;
+        /**
+         * @param string $variableName
+         * @param bool $isOptional
+         * @param mixed|null $defaultValue
+         */
+        public function __construct(string $variableName, bool $isOptional = false, $defaultValue = null)
+        {
+        }
+        public function getName() : string
+        {
+        }
+        public function setName(string $name)
+        {
+        }
+        /**
+         * @return string
+         */
+        public function getVariableName() : string
+        {
+        }
+        /**
+         * @return bool
+         */
+        public function isOptional() : bool
+        {
+        }
+        /**
+         * @return mixed
+         */
+        public function getDefaultValue()
+        {
+        }
+        public function replaceNestedDefinitions($replacer)
+        {
+        }
+        public function __toString() : string
+        {
+        }
+    }
+    interface ExtendsPreviousDefinition extends \DI\Definition\Definition
+    {
+        public function setExtendedDefinition(\DI\Definition\Definition $definition);
+    }
+    class FactoryDefinition implements \DI\Definition\Definition
+    {
+        private string $name;
+        /**
+         * @var callable
+         */
+        private $factory;
+        /**
+         * @var array
+         */
+        private array $parameters;
+        /**
+         * @param string $name
+         * @param array|callable|string $factory
+         * @param array $parameters
+         */
+        public function __construct(string $name, array $factory, array $parameters = array())
+        {
+        }
+        public function getName() : string
+        {
+        }
+        public function setName(string $name)
+        {
+        }
+        /**
+         * @return array|callable|string
+         */
+        public function getCallable() : array
+        {
+        }
+        /**
+         * @return array
+         */
+        public function getParameters() : array
+        {
+        }
+        public function replaceNestedDefinitions($replacer)
+        {
+        }
+        public function __toString() : string
+        {
+        }
+    }
+    class ObjectDefinition implements \DI\Definition\Definition
+    {
+        private string $name;
+        protected ?string $className;
+        protected ?\DI\Definition\ObjectDefinition\MethodInjection $constructorInjection;
+        protected array $propertyInjections;
+        /**
+         * @var array<array<ObjectDefinition\MethodInjection>>
+         */
+        protected array $methodInjections;
+        protected ?bool $lazy;
+        private bool $classExists;
+        private bool $isInstantiable;
+        /**
+         * @param string $name
+         */
+        public function __construct(string $name, ?string $className = null)
+        {
+        }
+        public function getName() : string
+        {
+        }
+        public function setName(string $name)
+        {
+        }
+        public function setClassName(?string $className)
+        {
+        }
+        public function getClassName() : string
+        {
+        }
+        public function getConstructorInjection() : ?\DI\Definition\ObjectDefinition\MethodInjection
+        {
+        }
+        public function setConstructorInjection(\DI\Definition\ObjectDefinition\MethodInjection $constructorInjection)
+        {
+        }
+        public function completeConstructorInjection(\DI\Definition\ObjectDefinition\MethodInjection $injection)
+        {
+        }
+        /**
+         * @return array<ObjectDefinition\PropertyInjection>
+         */
+        public function getPropertyInjections() : array
+        {
+        }
+        public function addPropertyInjection(\DI\Definition\ObjectDefinition\PropertyInjection $propertyInjection)
+        {
+        }
+        /**
+         * @return array<ObjectDefinition\MethodInjection>
+         */
+        public function getMethodInjections() : array
+        {
+        }
+        public function addMethodInjection(\DI\Definition\ObjectDefinition\MethodInjection $methodInjection)
+        {
+        }
+        public function completeFirstMethodInjection(\DI\Definition\ObjectDefinition\MethodInjection $injection)
+        {
+        }
+        public function setLazy(?bool $lazy = null)
+        {
+        }
+        public function isLazy() : bool
+        {
+        }
+        public function classExists() : bool
+        {
+        }
+        public function isInstantiable() : bool
+        {
+        }
+        public function replaceNestedDefinitions($replacer)
+        {
+        }
+        /**
+         * @param array<string> $replacements
+         */
+        public function replaceWildcards(array $replacements)
+        {
+        }
+        public function __toString() : string
+        {
+        }
+        public function updateCache()
+        {
+        }
+    }
+    class Reference implements \DI\Definition\Definition, \DI\Definition\SelfResolvingDefinition
+    {
+        private string $name;
+        /**
+         * @var string
+         */
+        private string $targetEntryName;
+        /**
+         * @param string $targetEntryName
+         */
+        public function __construct(string $targetEntryName)
+        {
+        }
+        public function getName() : string
+        {
+        }
+        public function setName(string $name)
+        {
+        }
+        public function getTargetEntryName() : string
+        {
+        }
+        public function resolve(\Psr\Container\ContainerInterface $container)
+        {
+        }
+        public function isResolvable(\Psr\Container\ContainerInterface $container) : bool
+        {
+        }
+        public function replaceNestedDefinitions($replacer)
+        {
+        }
+        public function __toString() : string
+        {
+        }
+    }
+    interface SelfResolvingDefinition
+    {
+        public function resolve(\Psr\Container\ContainerInterface $container);
+        public function isResolvable(\Psr\Container\ContainerInterface $container) : bool;
+    }
+    class StringDefinition implements \DI\Definition\Definition, \DI\Definition\SelfResolvingDefinition
+    {
+        private string $name;
+        private string $expression;
+        public function __construct(string $expression)
+        {
+        }
+        public function getName() : string
+        {
+        }
+        public function setName(string $name)
+        {
+        }
+        public function getExpression() : string
+        {
+        }
+        public function resolve(\Psr\Container\ContainerInterface $container) : string
+        {
+        }
+        public function isResolvable(\Psr\Container\ContainerInterface $container) : bool
+        {
+        }
+        public function replaceNestedDefinitions($replacer)
+        {
+        }
+        public function __toString() : string
+        {
+        }
+        public static function resolveExpression(string $entryName, string $expression, \Psr\Container\ContainerInterface $container) : string
+        {
+        }
+    }
+    class ValueDefinition implements \DI\Definition\Definition, \DI\Definition\SelfResolvingDefinition
+    {
+        private string $name;
+        private $value;
+        public function __construct($value)
+        {
+        }
+        public function getName() : string
+        {
+        }
+        public function setName(string $name)
+        {
+        }
+        public function getValue()
+        {
+        }
+        public function resolve(\Psr\Container\ContainerInterface $container)
+        {
+        }
+        public function isResolvable(\Psr\Container\ContainerInterface $container) : bool
+        {
+        }
+        public function replaceNestedDefinitions($replacer)
+        {
+        }
+        public function __toString() : string
+        {
+        }
+    }
+}
+namespace DI\Definition\Exception {
+    class InvalidDefinition extends \Exception
+    {
+        public static function create(\DI\Definition\Definition $definition, string $message, ?\Exception $previous = null) : \DI\Definition\Exception\InvalidDefinition
+        {
+        }
+    }
+}
+namespace DI\Definition\Helper {
+    class AutowireDefinitionHelper extends \DI\Definition\Helper\CreateDefinitionHelper
+    {
+        public const DEFINITION_CLASS = \DI\Definition\AutowireDefinition::class;
+        /**
+         * @param int|string $parameter
+         * @param mixed $value
+         *
+         * @return static
+         */
+        public function constructorParameter(int $parameter, $value) : \DI\Definition\Helper\AutowireDefinitionHelper
+        {
+        }
+        /**
+         * @param string $method
+         * @param int|string $parameter
+         * @param mixed $value
+         *
+         * @return static
+         */
+        public function methodParameter(string $method, int $parameter, $value) : \DI\Definition\Helper\AutowireDefinitionHelper
+        {
+        }
+    }
+    class CreateDefinitionHelper implements \DI\Definition\Helper\DefinitionHelper
+    {
+        private const DEFINITION_CLASS = \DI\Definition\ObjectDefinition::class;
+        private ?string $className;
+        private ?bool $lazy;
+        protected array $constructor;
+        private array $properties;
+        protected array $methods;
+        /**
+         * @param null|string $className
+         */
+        public function __construct(?string $className = null)
+        {
+        }
+        /**
+         * @return static
+         */
+        public function lazy() : \DI\Definition\Helper\CreateDefinitionHelper
+        {
+        }
+        /**
+         * @param mixed $parameters
+         *
+         * @return static
+         */
+        public function constructor(...$parameters) : \DI\Definition\Helper\CreateDefinitionHelper
+        {
+        }
+        /**
+         * @param string $property
+         * @param mixed $value
+         *
+         * @return static
+         */
+        public function property(string $property, $value) : \DI\Definition\Helper\CreateDefinitionHelper
+        {
+        }
+        /**
+         * @param string $method
+         * @param mixed $parameters
+         *
+         * @return static
+         */
+        public function method(string $method, ...$parameters) : \DI\Definition\Helper\CreateDefinitionHelper
+        {
+        }
+        public function getDefinition(string $entryName) : \DI\Definition\ObjectDefinition
+        {
+        }
+        /**
+         * @throws \DI\Definition\Exception\InvalidDefinition
+         */
+        public function fixParameters(\DI\Definition\ObjectDefinition $definition, string $method, array $parameters) : array
+        {
+        }
+    }
+    interface DefinitionHelper
+    {
+        /**
+         * @param string $entryName
+         */
+        public function getDefinition(string $entryName) : \DI\Definition\Definition;
+    }
+    class FactoryDefinitionHelper implements \DI\Definition\Helper\DefinitionHelper
+    {
+        /**
+         * @var callable
+         */
+        private $factory;
+        private bool $decorate;
+        private array $parameters;
+        /**
+         * @param bool $decorate
+         */
+        public function __construct(array $factory, bool $decorate = false)
+        {
+        }
+        public function getDefinition(string $entryName) : \DI\Definition\FactoryDefinition
+        {
+        }
+        /**
+         * @param string $parameter
+         * @param mixed $value
+         *
+         * @return static
+         */
+        public function parameter(string $parameter, $value) : \DI\Definition\Helper\FactoryDefinitionHelper
+        {
+        }
+    }
+}
+namespace DI\Definition\ObjectDefinition {
+    class MethodInjection implements \DI\Definition\Definition
+    {
+        private string $methodName;
+        /**
+         * @var array
+         */
+        private array $parameters;
+        /**
+         * @param array $parameters
+         */
+        public function __construct(string $methodName, array $parameters = array())
+        {
+        }
+        public static function constructor(array $parameters = array()) : \DI\Definition\ObjectDefinition\MethodInjection
+        {
+        }
+        public function getMethodName() : string
+        {
+        }
+        /**
+         * @return array
+         */
+        public function getParameters() : array
+        {
+        }
+        public function replaceParameters(array $parameters)
+        {
+        }
+        public function merge(\DI\Definition\ObjectDefinition\MethodInjection $definition)
+        {
+        }
+        public function getName() : string
+        {
+        }
+        public function setName(string $name)
+        {
+        }
+        public function replaceNestedDefinitions($replacer)
+        {
+        }
+        public function __toString() : string
+        {
+        }
+    }
+    class PropertyInjection
+    {
+        private string $propertyName;
+        private $value;
+        private ?string $className;
+        /**
+         * @param string $propertyName
+         * @param mixed $value
+         */
+        public function __construct(string $propertyName, $value, ?string $className = null)
+        {
+        }
+        public function getPropertyName() : string
+        {
+        }
+        /**
+         * @return mixed
+         */
+        public function getValue()
+        {
+        }
+        public function getClassName() : ?string
+        {
+        }
+        public function replaceNestedDefinition($replacer)
+        {
+        }
+    }
+}
+namespace DI\Definition\Resolver {
+    /**
+     * @template-covariant T as \DI\Definition\Definition
+     */
+    interface DefinitionResolver
+    {
+        /**
+         * @param T $definition
+         * @param array $parameters
+         *
+         * @return mixed
+         *
+         * @throws \DI\Definition\Exception\InvalidDefinition
+         * @throws \DI\DependencyException
+         */
+        public function resolve(\DI\Definition\Definition $definition, array $parameters = array());
+        /**
+         * @param T $definition
+         * @param array $parameters
+         */
+        public function isResolvable(\DI\Definition\Definition $definition, array $parameters = array()) : bool;
+    }
+}
+namespace DI\Definition\Source {
+    interface DefinitionSource
+    {
+        /**
+         * @throws \DI\Definition\Exception\InvalidDefinition
+         */
+        public function getDefinition(string $name) : ?\DI\Definition\Definition;
+        /**
+         * @return array<string, \DI\Definition\Definition>
+         */
+        public function getDefinitions() : array;
+    }
+    interface MutableDefinitionSource extends \DI\Definition\Source\DefinitionSource
+    {
+        public function addDefinition(\DI\Definition\Definition $definition);
+    }
+    class SourceChain implements \DI\Definition\Source\DefinitionSource, \DI\Definition\Source\MutableDefinitionSource
+    {
+        private ?\DI\Definition\Source\MutableDefinitionSource $mutableSource;
+        /**
+         * @var list<DI\Definition\Source\DefinitionSource>
+         */
+        private array $sources;
+        /**
+         * @param list<DI\Definition\Source\DefinitionSource> $sources
+         */
+        public function __construct(array $sources)
+        {
+        }
+        /**
+         * @param int $startIndex
+         *
+         * @throws \DI\Definition\Exception\InvalidDefinition
+         */
+        public function getDefinition(string $name, int $startIndex = 0) : ?\DI\Definition\Definition
+        {
+        }
+        public function getDefinitions() : array
+        {
+        }
+        public function addDefinition(\DI\Definition\Definition $definition)
+        {
+        }
+        public function resolveExtendedDefinition(\DI\Definition\ExtendsPreviousDefinition $definition, int $currentIndex)
+        {
+        }
+        public function setMutableDefinitionSource(\DI\Definition\Source\MutableDefinitionSource $mutableSource)
+        {
+        }
+    }
+}
+namespace DI\Factory {
+    interface RequestedEntry
+    {
+        public function getName() : string;
+    }
+}
+namespace DI\Proxy {
+    class ProxyFactory
+    {
+        private ?\ProxyManager\Factory\LazyLoadingValueHolderFactory $proxyManager;
+        /**
+         * @var null|string
+         */
+        private ?string $proxyDirectory;
+        /**
+         * @param null|string $proxyDirectory
+         */
+        public function __construct(?string $proxyDirectory = null)
+        {
+        }
+        /**
+         * @param class-string $className
+         * @param \Closure $initializer
+         */
+        public function createProxy(string $className, \Closure $initializer) : \ProxyManager\Proxy\LazyLoadingInterface
+        {
+        }
+        /**
+         * @param class-string $className
+         */
+        public function generateProxyClass(string $className)
+        {
+        }
+        public function proxyManager() : \ProxyManager\Factory\LazyLoadingValueHolderFactory
+        {
+        }
+    }
+}

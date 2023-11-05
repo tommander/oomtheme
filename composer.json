@@ -1,7 +1,7 @@
 {
     "scripts": {
         "phpcs": "phpcs",
-        "psalm": "psalm",
+        "psalm": "psalm --show-info=true --no-file-cache --no-reflection-cache --no-cache",
         "qa": [
             "@phpcs",
             "@psalm"
