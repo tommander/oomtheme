@@ -140,6 +140,18 @@ main > article > div.entry-content > *:nth-child(odd) {
 	color: #444;
 }
 
+main h2 {
+	font-size: 140%;
+	font-weight: bold;
+	text-align: center;
+}
+
+main h3 {
+	font-size: 110%;
+	font-weight: bold;
+	text-align: center;
+}
+
 /* MAIN (BIBLE) */
 
 main[class=bible] {
