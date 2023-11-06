@@ -20,25 +20,28 @@
             <directory name="vendor" />
         </ignoreFiles>
     </projectFiles>
+
     <stubs>
         <file name="vendor/php-stubs/wordpress-stubs/wordpress-stubs.php" />
-        <file name="stubs/di.phpstub" preloadClasses="true" />
         <file name="stubs/oomplugin.phpstub" preloadClasses="true" />
     </stubs>
+
     <issueHandlers>
-    <UndefinedClass>
-        <errorLevel type="suppress">
-          <file name="functions.php" />
-        </errorLevel>
-      </UndefinedClass>
+        <UndefinedClass>
+            <errorLevel type="suppress">
+                <file name="functions.php" />
+            </errorLevel>
+        </UndefinedClass>
     </issueHandlers>
+
     <forbiddenFunctions>
         <function name="var_dump" />
         <function name="var_export" />
         <function name="print_r" />
         <function name="eval" />
-      </forbiddenFunctions>
-      <globals>
+    </forbiddenFunctions>
+
+    <globals>
         <var name="oomtheme_main" type="TMD\OrderOfMass\Plugin\Main" />
         <var name="oomtheme_calendar" type="TMD\OrderOfMass\Plugin\Calendar" />
         <var name="oomtheme_virtual_page" type="TMD\OrderOfMass\Plugin\VirtualPage" />
@@ -47,6 +50,5 @@
         <var name="oomtheme_mysteries" type="TMD\OrderOfMass\Plugin\Mysteries" />
         <var name="oomtheme_parameters" type="TMD\OrderOfMass\Plugin\Parameters" />
         <var name="oomtheme_l" type="callable" />
-      </globals>
-    
+    </globals>
 </psalm>
