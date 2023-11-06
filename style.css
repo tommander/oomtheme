@@ -65,15 +65,12 @@ i {
 	padding: 0.5rem 1rem;
 	flex-wrap: wrap;
 }
-#navSettings {
-}
 #navSettings > form {
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
 }
 
-#navDate > div,
 #navSettings > form > div {
 	display: flex;
 	flex-direction: column;
@@ -132,19 +129,6 @@ main > article > div.entry-content > *:nth-child(odd) {
 	background-color: rgba(255, 255, 255, 0.1);
 }
 
-/*div.options {
-	display: grid;
-	grid-auto-flow: column;
-	grid-auto-columns: 1fr;
-	column-gap: 0.5rem;
-	padding: 0 !important;
-}
-
-div.options > div {
-	margin: 0 !important;
-	padding: 0 !important;
-}*/
-
 .who {
 	font-weight: bold;
 	text-transform: capitalize;
@@ -154,45 +138,6 @@ div.options > div {
 .command {
 	font-style: italic;
 	color: #444;
-}
-
-.choice, div[role=tablist], div[role=tabpanel] {
-	margin: 0;
-	padding: 0;
-	background-color: rgba(255,255,255,0) !important;
-}
-
-.choiceTabsLabel {
-	display: inline-block;
-	background-color: rgba(255,255,255,0) !important;
-}
-
-.choice button {
-	padding: 0.25rem 0.75rem;
-}
-
-.choice button[aria-selected="true"] {
-	font-weight: bold;
-}
-
-.choice button[aria-selected="true"]::before {
-	content: "> ";
-}
-
-.choice button[aria-selected="true"]::after {
-	content: " <";
-}
-
-.heading1 {
-	font-size: 140%;
-	font-weight: bold;
-	text-align: center;
-}
-
-.heading2 {
-	font-size: 110%;
-	font-weight: bold;
-	text-align: center;
 }
 
 /* MAIN (BIBLE) */
