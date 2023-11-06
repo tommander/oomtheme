@@ -94,12 +94,12 @@ $oomtheme_param_date = $oomtheme_parameters->get_parameter( Parameters::PARAMETE
 			<?php
 			$oomtheme_l( 'Year' );
 			$lectyear = $oomtheme_calendar->liturgical_year( $oomtheme_param_date );
-			echo esc_html( $oomtheme_calendar->year_cycle( $lectyear ) );
+			echo '&nbsp;' . esc_html( $oomtheme_calendar->year_cycle( $lectyear ) );
 			?>
 			</div><div>
 			<?php
 			$oomtheme_l( 'Week' );
-			echo esc_html( $oomtheme_calendar->week_cycle( $lectyear ) );
+			echo '&nbsp;' . esc_html( $oomtheme_calendar->week_cycle( $lectyear ) );
 			?>
 			</div><div>
 			<?php
