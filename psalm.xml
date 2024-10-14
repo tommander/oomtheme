@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="1"
+    resolveFromConfigFile="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    findUnusedBaselineEntry="true"
+    findUnusedCode="false"
+    reportMixedIssues="true"
+    findUnusedPsalmSuppress="true"
+>
+    <projectFiles>
+        <file name="content.php" />
+        <file name="footer.php" />
+        <file name="functions.php" />
+        <file name="header.php" />
+        <file name="index.php" />
+        <ignoreFiles>
+            <directory name="vendor" />
+        </ignoreFiles>
+    </projectFiles>
+
+    <stubs>
+        <file name="vendor/php-stubs/wordpress-stubs/wordpress-stubs.php" />
+        <file name="stubs/oomplugin.phpstub" preloadClasses="true" />
+    </stubs>
+
+    <issueHandlers>
+        <UndefinedClass>
+            <errorLevel type="suppress">
+                <file name="functions.php" />
+            </errorLevel>
+        </UndefinedClass>
+    </issueHandlers>
+
+    <forbiddenFunctions>
+        <function name="var_dump" />
+        <function name="var_export" />
+        <function name="print_r" />
+        <function name="eval" />
+    </forbiddenFunctions>
+
+    <globals>
+        <var name="oomtheme_main" type="TMD\OrderOfMass\Plugin\Main" />
+        <var name="oomtheme_calendar" type="TMD\OrderOfMass\Plugin\Calendar" />
+        <var name="oomtheme_virtual_page" type="TMD\OrderOfMass\Plugin\VirtualPage" />
+        <var name="oomtheme_labels" type="TMD\OrderOfMass\Plugin\Labels" />
+        <var name="oomtheme_bible" type="TMD\OrderOfMass\Plugin\Bible" />
+        <var name="oomtheme_mysteries" type="TMD\OrderOfMass\Plugin\Mysteries" />
+        <var name="oomtheme_parameters" type="TMD\OrderOfMass\Plugin\Parameters" />
+        <var name="oomtheme_l" type="callable" />
+    </globals>
+</psalm>

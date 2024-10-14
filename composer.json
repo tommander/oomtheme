@@ -1,0 +1,45 @@
+{
+    "name": "tmd/oomtheme",
+    "description": "Order of Mass Theme",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tomáš Rajnoha",
+            "email": "tomas.rajnoha@tommander.cz",
+            "homepage": "https://tommander.cz",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "oomtheme@tommander.cz",
+        "issues": "https://github.com/tommander/oomtheme/issues",
+        "source": "https://github.com/tommander/oomtheme"
+    },
+    "scripts": {
+        "phpcs": "phpcs",
+        "psalm": "psalm --show-info=true --no-file-cache --no-reflection-cache --no-cache",
+        "qa": [
+            "@phpcs",
+            "@psalm"
+        ]
+    },
+    "require": {},
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.7",
+        "vimeo/psalm": "^5.12",
+        "ocramius/proxy-manager": "^2.14",
+        "wp-coding-standards/wpcs": "^3.0",
+        "php-stubs/wordpress-stubs": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "TMD\\OrderOfMass\\Theme\\": "/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
