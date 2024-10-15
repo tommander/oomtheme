@@ -27,7 +27,7 @@ global $oomtheme_l;
 			<span>
 				<?php $oomtheme_l( 'Source' ); ?>:
 				<a href="https://github.com/tommander/oomtheme">OoM Theme</a>
-                <a href="https://github.com/tommander/oomplugin">OoM Plugin</a>
+				<a href="https://github.com/tommander/oomplugin">OoM Plugin</a>
 			</span>
 			<span>
 				<?php $oomtheme_l( 'Author' ); ?>:

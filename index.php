@@ -7,11 +7,16 @@
  * @since      1.0
  */
 
-get_header(); ?>
+get_header();
+$spt = single_post_title( display: false );
+if ( is_string( $spt ) !== true ) {
+	$spt = '';
+}
+?>
 
-<?php if ( is_home() === true && is_front_page() !== true && empty( single_post_title( '', false ) ) !== true ) : ?>
+<?php if ( is_home() === true && is_front_page() !== true && '' !== $spt ) : ?>
 	<header class="page-header alignwide">
-		<h1 class="page-title"><?php single_post_title(); ?></h1>
+		<h1 class="page-title"><?php echo esc_html( $spt ); ?></h1>
 	</header><!-- .page-header -->
 <?php endif; ?>
 
