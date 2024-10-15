@@ -118,15 +118,24 @@ main abbr {
 main > article > div.entry-content > span {
 	display: block;
 }
-main > article > div.entry-content > * {
+.wp-block-essential-blocks-advanced-tabs .eb-parent-wrapper .eb-advanced-tabs-wrapper .eb-tabs-contents .eb-tab-wrapper.active {
+    padding: 0;
+}
+main > article > div.entry-content > *:not(.wp-block-essential-blocks-advanced-tabs),
+.eb-tab-inner > *:not(div) {
 	padding: 1rem;
 }
-main > article > div.entry-content > *:nth-child(even) {
+main > article > div.entry-content > *:not(.wp-block-essential-blocks-advanced-tabs):nth-child(even),
+.eb-tab-inner > *:not(div):nth-child(even) {
 	background-color: rgba(255, 255, 255, 0.2);
 }
 
-main > article > div.entry-content > *:nth-child(odd) {
+main > article > div.entry-content > *:not(.wp-block-essential-blocks-advanced-tabs):nth-child(odd),
+.eb-tab-inner > *:not(div):nth-child(odd) {
 	background-color: rgba(255, 255, 255, 0.1);
+}
+.wp-block-spacer {
+    display: none;
 }
 
 .who {

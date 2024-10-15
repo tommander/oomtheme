@@ -26,11 +26,12 @@ global $oomtheme_l;
 			</span>
 			<span>
 				<?php $oomtheme_l( 'Source' ); ?>:
-				<a href="https://github.com/tommander/catholic-mass">GitHub</a>
+				<a href="https://github.com/tommander/oomtheme">OoM Theme</a>
+                <a href="https://github.com/tommander/oomplugin">OoM Plugin</a>
 			</span>
 			<span>
 				<?php $oomtheme_l( 'Author' ); ?>:
-				<a href="mailto:tommander@tommander.cz">Tomáš <q>Tommander</q> Rajnoha</a>
+				<a href="mailto:tomas.rajnoha@proton.me">Tomáš <q>Tommander</q> Rajnoha</a>
 			</span>
 			<span>&nbsp;</span>
 			<span>

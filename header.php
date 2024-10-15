@@ -72,12 +72,12 @@ $oomtheme_param_date = $oomtheme_parameters->get_parameter( Parameters::PARAMETE
 				<label for="DATE_SELECTION"><?php $oomtheme_l( 'Date' ); ?></label>
 				<input type="date" name="date" id="DATE_SELECTION" value="<?php echo esc_attr( $oomtheme_param_date ); ?>">
 			</div>
-			<div>
+			<!--<div>
 				<label for="BIBLE_SELECTION"><?php $oomtheme_l( 'Bible' ); ?></label>
 				<select name="bible" id="BIBLE_SELECTION">
-				<?php $oomtheme_bible->render_options(); ?>
+				<?php //$oomtheme_bible->render_options(); ?>
 				</select>
-			</div>
+			</div>-->
 			</form>
 		</div>
 		<div id="navLegend">
